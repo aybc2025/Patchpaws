@@ -1,0 +1,16 @@
+name: Verify
+on:
+  push:
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Every level has one answer and needs no guessing
+        run: node tools/verify-levels.mjs
+      - name: Service worker precaches every shipped file
+        run: node tools/check-precache.mjs

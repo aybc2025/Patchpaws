@@ -1,0 +1,21 @@
+.levels .topbar { position: sticky; top: calc(-1 * (var(--s2) + var(--safe-top))); z-index: 2; background: var(--midnight); padding-block: var(--s2); }
+.band { margin-top: var(--s4); }
+.band-title { display: flex; align-items: baseline; gap: var(--s3); margin: 0 0 var(--s3); font-size: var(--fs-16); font-weight: 700; }
+.band-title span { font-size: 0.8125rem; font-weight: 500; color: var(--haze); }
+.level-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s3); }
+
+.level {
+  aspect-ratio: 1; border-radius: var(--r-surface);
+  background: var(--patch); color: var(--ink);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  transition: transform var(--t-tap) var(--ease-out), box-shadow var(--t-tap) var(--ease-out);
+}
+.level:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28); }
+.level-no { font-size: var(--fs-16); font-weight: 700; font-variant-numeric: tabular-nums; }
+.level-stars { display: flex; gap: 1px; }
+.level-stars .star { width: 11px; height: 11px; fill: rgba(28, 30, 61, 0.22); }
+.level-stars .star.is-on { fill: var(--ink); }
+.level.is-current { outline: 3px solid var(--yarn); outline-offset: 3px; }
+.level.is-locked { background: var(--dusk-lo); color: #5A5F9E; box-shadow: none; cursor: default; }
+.level.is-locked:active { transform: none; }

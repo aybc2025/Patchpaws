@@ -1,0 +1,93 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--midnight);
+  color: var(--moon);
+  font-family: var(--font);
+  font-size: var(--fs-16);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+button { font: inherit; color: inherit; border: 0; background: none; padding: 0; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--yarn); outline-offset: 3px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Screens */
+#app { position: relative; height: 100%; overflow: hidden; }
+.screen {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: calc(var(--s2) + var(--safe-top)) var(--s4) calc(var(--s4) + var(--safe-bottom));
+  max-width: 560px; margin-inline: auto;
+  overflow-y: auto;
+}
+.screen.is-entering { animation: screen-in var(--t-screen) var(--ease-out) both; }
+.screen.is-entering.is-back { animation-name: screen-in-back; }
+.screen.is-leaving { animation: screen-out 200ms var(--ease-out) both; pointer-events: none; }
+@keyframes screen-in { from { transform: translateX(14%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes screen-in-back { from { transform: translateX(-14%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes screen-out { to { opacity: 0; } }
+
+/* Buttons */
+.btn {
+  min-height: 56px; border-radius: var(--r-pill);
+  display: flex; align-items: center; justify-content: center; gap: var(--s2);
+  font-weight: 700; font-size: var(--fs-16); padding-inline: var(--s6);
+  transition: transform var(--t-tap) var(--ease-out), box-shadow var(--t-tap) var(--ease-out);
+  user-select: none;
+}
+.btn:active { transform: translateY(3px); }
+.btn-primary { background: var(--yarn); color: var(--ink); box-shadow: var(--lift-yarn); }
+.btn-primary:active { box-shadow: 0 2px 0 var(--yarn-edge); }
+.btn-ghost { background: var(--dusk); color: var(--moon); box-shadow: var(--lift-dusk); }
+.btn-ghost:active { box-shadow: 0 2px 0 var(--dusk-edge); }
+.btn-quiet { color: var(--haze); font-weight: 500; min-height: 48px; }
+.btn-quiet:active { transform: scale(0.97); }
+
+.iconbtn {
+  width: 44px; height: 44px; border-radius: var(--r-pill);
+  background: var(--dusk); display: grid; place-items: center; flex: none;
+  transition: transform var(--t-tap) var(--ease-out);
+}
+.iconbtn svg { width: 22px; height: 22px; }
+.iconbtn:active { transform: scale(0.92); }
+
+.tile {
+  background: var(--dusk); border-radius: var(--r-surface); box-shadow: var(--lift-dusk);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s1);
+  color: var(--haze); font-size: 0.8125rem; font-weight: 500; min-height: 72px;
+  position: relative;
+  transition: transform var(--t-tap) var(--ease-out), box-shadow var(--t-tap) var(--ease-out);
+}
+.tile svg { width: 26px; height: 26px; }
+.tile:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--dusk-edge); }
+.tile[aria-pressed="true"] { background: var(--yarn); color: var(--ink); box-shadow: var(--lift-yarn); }
+.tile:disabled { opacity: 0.45; cursor: default; }
+.tile:disabled:active { transform: none; box-shadow: var(--lift-dusk); }
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { filter: brightness(1.05); }
+  .btn-ghost:hover, .tile:hover:not(:disabled), .iconbtn:hover { background: var(--dusk-hi); }
+  .tile[aria-pressed="true"]:hover { background: var(--yarn); }
+}
+
+/* Update toast */
+.toast {
+  position: fixed; inset-inline: var(--s4); bottom: calc(var(--s4) + var(--safe-bottom));
+  max-width: 420px; margin-inline: auto; z-index: 50;
+  background: var(--moon); color: var(--ink); border-radius: var(--r-surface);
+  padding: var(--s3) var(--s3) var(--s3) var(--s4); display: flex; align-items: center; gap: var(--s3);
+  box-shadow: 0 5px 0 #9EA1CF; font-weight: 500;
+  animation: toast-in var(--t-sheet-in) var(--ease-drawer) both;
+}
+.toast span { flex: 1; }
+.toast .btn { min-height: 40px; padding-inline: var(--s4); font-size: var(--fs-14); box-shadow: 0 3px 0 var(--yarn-edge); }
+@keyframes toast-in { from { transform: translateY(140%); } to { transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.is-entering, .screen.is-entering.is-back { animation-name: fade-in; }
+  .toast { animation-name: fade-in; }
+}
+@keyframes fade-in { from { opacity: 0; } }

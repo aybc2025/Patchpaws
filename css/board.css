@@ -1,0 +1,67 @@
+/* Board: quilt SVG with a button grid laid exactly over its squares. */
+.board-area { flex: 1; display: grid; place-items: center; min-height: 0; padding-block: var(--s3); }
+.board-wrap { width: min(100%, 520px, calc(100dvh - 330px - var(--safe-top) - var(--safe-bottom))); min-width: 260px; }
+.board { position: relative; aspect-ratio: 1; filter: drop-shadow(var(--lift-board)); }
+.quilt { display: block; width: 100%; height: 100%; overflow: visible; }
+
+.quilt-seam { fill: none; stroke: var(--ink); stroke-width: 0.085; stroke-linecap: round; stroke-dasharray: 1; }
+.quilt-stitch { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 0.028; stroke-dasharray: 0.11 0.09; stroke-linecap: round; }
+.quilt-grid { fill: none; stroke: rgba(28, 30, 61, 0.16); stroke-width: 0.02; }
+.quilt-border { fill: none; stroke: var(--ink); stroke-width: 0.16; }
+.quilt-patches rect, .mark, .fx-dust, .fx-puff, .cat, .cat-body, .cat-ear, .cat-tail, .focus-target, .quilt-shimmer {
+  transform-box: fill-box;
+}
+.quilt-patches rect { transform-origin: center; }
+.quilt-shimmer { pointer-events: none; }
+.board-wrap .quilt { transition: filter 500ms var(--ease-out) 450ms; }
+.board-wrap.is-lost .quilt { filter: saturate(0.35) brightness(0.78); }
+
+/* ✕ marks: a cross-stitch */
+.mark { fill: none; stroke: rgba(28, 30, 61, 0.62); stroke-width: 0.075; stroke-linecap: round; transform-origin: center; }
+
+/* Cats */
+.cat { transform-origin: 50% 92%; }
+.cat-body { transform-origin: 50% 100%; animation: breathe 3.6s ease-in-out infinite; }
+.cat-cell:nth-child(3n) .cat-body { animation-delay: -1.2s; }
+.cat-cell:nth-child(3n + 1) .cat-body { animation-delay: -2.4s; }
+.cat-ear-l { transform-origin: 75% 95%; }
+.cat-ear-r { transform-origin: 25% 95%; }
+.cat-tail { transform-origin: 0% 100%; }
+.cat .eyes-open, .cat .eyes-angry, .cat .mouth-hiss { display: none; }
+.cat[data-mood="awake"] .eyes-sleep, .cat[data-mood="angry"] .eyes-sleep { display: none; }
+.cat[data-mood="awake"] .eyes-open { display: inline; }
+.cat[data-mood="angry"] .eyes-angry, .cat[data-mood="angry"] .mouth-hiss { display: inline; }
+.cat[data-mood="angry"] .mouth-calm { display: none; }
+.cat[data-mood="angry"] .cat-ear-l { transform: rotate(-22deg) translateY(6%); }
+.cat[data-mood="angry"] .cat-ear-r { transform: rotate(22deg) translateY(6%); }
+@keyframes breathe { 0%, 100% { transform: none; } 50% { transform: scale(1.015, 1.035); } }
+
+/* Input grid */
+.board-cells {
+  position: absolute; inset: var(--pad);
+  display: grid; grid-template-rows: repeat(var(--n), 1fr);
+  touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+.board-row { display: grid; grid-template-columns: repeat(var(--n), 1fr); }
+.board-cell { border-radius: 4px; outline-offset: -3px; }
+.board-cell:focus-visible { outline: 3px solid var(--yarn); }
+
+/* Hint spotlight */
+.focus-dim rect { fill: rgba(35, 38, 74, 0.5); }
+.quilt-focus.is-on { animation: fade-in 260ms var(--ease-out); }
+.focus-outline { fill: none; stroke: var(--yarn); stroke-width: 0.12; stroke-linecap: round; stroke-dasharray: 0.16 0.1; animation: march 1s linear infinite; }
+.focus-outline.is-static { animation: none; }
+.focus-target { fill: none; stroke: var(--yarn); stroke-width: 0.09; transform-origin: center; animation: pulse 900ms var(--ease-in-out) infinite alternate; }
+@keyframes march { to { stroke-dashoffset: -0.52; } }
+@keyframes pulse { from { transform: scale(0.94); } to { transform: scale(1.06); } }
+
+/* Effect shapes */
+.fx-dust { fill: rgba(255, 255, 255, 0.75); transform-origin: center; }
+.fx-puff { fill: #fff; transform-origin: center; }
+.fx-flash { fill: var(--hiss); }
+.fx-noroom { fill: rgba(255, 111, 125, 0.38); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-body, .focus-outline, .focus-target { animation: none; }
+  .board-wrap .quilt { transition-duration: 0ms; }
+}

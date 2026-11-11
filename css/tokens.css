@@ -1,0 +1,51 @@
+/* Patchpaws — declared visual system ("Midnight quilt"). Every value in the app traces here. */
+@font-face { font-family: "Poppins"; src: url("../fonts/poppins-400.woff") format("woff"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("../fonts/poppins-500.woff") format("woff"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("../fonts/poppins-700.woff") format("woff"); font-weight: 700; font-display: swap; }
+
+:root {
+  /* UI palette */
+  --midnight: #23264A;   /* app background */
+  --dusk: #2F3366;       /* raised surfaces */
+  --dusk-hi: #3A3F7A;    /* raised surface, selected / borders */
+  --dusk-lo: #262A55;    /* inset wells inside raised surfaces */
+  --dusk-edge: #1A1C3B;  /* offset shadow under Dusk */
+  --moon: #F4F2FF;       /* primary text */
+  --haze: #A7AAD9;       /* secondary text */
+  --yarn: #FFC54D;       /* the one accent */
+  --yarn-edge: #C9922A;  /* offset shadow under Yarn */
+  --hiss: #FF6F7D;       /* hearts + mistakes only */
+  --ink: #1C1E3D;        /* seams, marks, outlines, text on Yarn */
+  --scrim: rgba(23, 25, 52, 0.62);
+
+  /* Quilt patches (index = patch id) */
+  --p0: #F6A6B9; --p1: #FFC39E; --p2: #F8E59A; --p3: #A9E3BF; --p4: #93D3D6;
+  --p5: #A3BEF4; --p6: #C8B3F0; --p7: #CFDB9C; --p8: #F49A8E; --p9: #D9D3E8;
+
+  /* Type */
+  --font: "Poppins", ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+  --fs-12: 0.75rem; --fs-14: 0.875rem; --fs-16: 1rem; --fs-20: 1.25rem;
+  --fs-25: 1.5625rem; --fs-31: 1.9375rem; --fs-46: 2.875rem;
+
+  /* Spacing (4px base) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s6: 24px; --s8: 32px; --s12: 48px;
+
+  /* Radius — pillowy */
+  --r-surface: 20px; --r-sheet: 28px; --r-pill: 999px; --r-board: 16px;
+
+  /* Elevation — solid offset shadows */
+  --lift-dusk: 0 5px 0 var(--dusk-edge);
+  --lift-yarn: 0 5px 0 var(--yarn-edge);
+  --lift-board: 0 6px 0 #14162E;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-tap: 100ms; --t-mark: 120ms; --t-toggle: 200ms; --t-plop: 320ms;
+  --t-sheet-in: 420ms; --t-sheet-out: 240ms; --t-screen: 280ms;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}

@@ -1,0 +1,41 @@
+.home { gap: var(--s4); }
+.home-hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s6); min-height: 300px; }
+
+/* Wordmark with the peeking cat — the home screen's one orchestrated moment */
+.logo { position: relative; margin: 56px 0 0; text-align: center; line-height: 1; }
+.logo-word { position: relative; z-index: 1; font-size: var(--fs-46); font-weight: 700; letter-spacing: -0.03em; }
+.logo-peek { position: absolute; z-index: 0; left: 50%; bottom: 72%; width: 76px; height: 64px; translate: -50% 0; overflow: hidden; }
+.logo-cat { position: absolute; left: 0; top: 2px; width: 76px; height: 76px; animation: peek 900ms var(--ease-pop) 250ms both; }
+@keyframes peek { from { transform: translateY(80%); } to { transform: none; } }
+
+.home-quilt-holder { width: min(56vw, 210px); aspect-ratio: 1; }
+.home-quilt { width: 100%; height: 100%; transform: rotate(-4deg); filter: drop-shadow(var(--lift-board)); animation: quilt-drop 700ms var(--ease-out) 150ms both; }
+@keyframes quilt-drop { from { opacity: 0; transform: rotate(-10deg) translateY(16px) scale(0.94); } to { opacity: 1; transform: rotate(-4deg); } }
+
+.home-actions { display: flex; flex-direction: column; gap: var(--s4); }
+.btn-big { min-height: 60px; font-size: var(--fs-20); }
+
+.daily-card {
+  display: grid; grid-template-columns: 1fr auto; gap: var(--s1) var(--s3); align-items: center; text-align: start;
+  background: var(--dusk); border-radius: var(--r-surface); box-shadow: var(--lift-dusk); padding: var(--s4);
+  transition: transform var(--t-tap) var(--ease-out), box-shadow var(--t-tap) var(--ease-out);
+}
+.daily-card:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--dusk-edge); }
+.daily-text { display: flex; flex-direction: column; }
+.daily-text b { font-size: var(--fs-16); font-weight: 700; }
+.daily-text span { font-size: 0.8125rem; color: var(--haze); }
+.daily-play { width: 44px; height: 44px; border-radius: var(--r-pill); background: var(--yarn); color: var(--ink); display: grid; place-items: center; box-shadow: 0 3px 0 var(--yarn-edge); }
+.daily-play svg { width: 22px; height: 22px; }
+.week { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: var(--s2); }
+.day { height: 30px; border-radius: 10px; background: var(--dusk-lo); display: grid; place-items: center; font-size: 0.6875rem; font-weight: 700; color: var(--haze); }
+.day svg { width: 16px; height: 16px; }
+.day.is-done { background: var(--p3); color: var(--ink); }
+.day.is-today { box-shadow: inset 0 0 0 2px var(--yarn); color: var(--moon); }
+.day.is-done.is-today { color: var(--ink); }
+
+.home-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+.home-tiles .tile .star { fill: var(--yarn); }
+
+@media (hover: hover) and (pointer: fine) { .daily-card:hover { background: var(--dusk-hi); } }
+@media (max-height: 700px) { .home-quilt-holder { width: min(40vw, 150px); } .logo { margin-top: 44px; } }
+@media (prefers-reduced-motion: reduce) { .logo-cat, .home-quilt { animation: none; } }

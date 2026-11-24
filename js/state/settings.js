@@ -6,6 +6,7 @@ const DEFAULTS = {
   sound: true,
   haptics: true,
   autoMark: true,
+  keepAwake: false,       // hold a screen wake lock while the app is open
   tapMode: 'mark',        // 'mark' | 'cat' — what a single tap does
   difficulty: 'cozy',     // 'cozy' | 'classic'
 };

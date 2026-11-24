@@ -6,12 +6,15 @@ import { levelsScreen } from './ui/screens/levels.js';
 import { gameScreen } from './ui/screens/game.js';
 import { unlockAudio } from './audio/sfx.js';
 import { showUpdateToast } from './ui/update-toast.js';
+import { startWakeLock } from './state/wake-lock.js';
 
 startRouter(document.getElementById('app'), {
   home: homeScreen,
   levels: levelsScreen,
   game: gameScreen,
 });
+
+startWakeLock();
 
 window.addEventListener('pointerdown', unlockAudio, { once: true, capture: true });
 

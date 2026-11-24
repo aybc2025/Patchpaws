@@ -16,14 +16,18 @@ export function createTimer(session) {
     if (text !== shown) { el.textContent = text; shown = text; }
   }, 250);
 
-  const onVisible = () => { last = performance.now(); };
+  // Save the clock the moment the app is backgrounded or closed, not just every 5 s.
+  const onVisible = () => { last = performance.now(); if (document.hidden) session.persist(); };
+  const onHide = () => session.persist();
   document.addEventListener('visibilitychange', onVisible);
+  window.addEventListener('pagehide', onHide);
 
   return {
     el,
     destroy() {
       clearInterval(interval);
       document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('pagehide', onHide);
     },
   };
 }

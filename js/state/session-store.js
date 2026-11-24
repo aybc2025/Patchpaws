@@ -14,7 +14,8 @@ export function loadSession(key, size) {
     hearts: clampInt(s.hearts, 0, 3, 3),
     mistakes: clampInt(s.mistakes, 0, 999, 0),
     hintsUsed: clampInt(s.hintsUsed, 0, 999, 0),
-    elapsedMs: clampInt(s.elapsedMs, 0, 1e9, 0),
+    // elapsedMs accumulates fractional performance.now() deltas, so round rather than reject.
+    elapsedMs: clampInt(Math.round(s.elapsedMs), 0, 1e9, 0),
     history: Array.isArray(s.history) ? s.history : [],
     status: s.status === 'lost' ? 'lost' : 'playing',
   };

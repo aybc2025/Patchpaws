@@ -22,7 +22,7 @@ export function createSession({ key, puzzle }) {
   const persist = () => {
     const s = get();
     if (s.status === 'won') dropSession(key);
-    else saveSession(key, { cells: s.cells, hearts: s.hearts, mistakes: s.mistakes, hintsUsed: s.hintsUsed, elapsedMs: s.elapsedMs, history: s.history.slice(-200), status: s.status });
+    else saveSession(key, { cells: s.cells, hearts: s.hearts, mistakes: s.mistakes, hintsUsed: s.hintsUsed, elapsedMs: Math.round(s.elapsedMs), history: s.history.slice(-200), status: s.status });
   };
   const commit = (patch, kind, cells = [], meta = {}) => {
     store.set({ ...patch, lastEvent: { kind, cells, meta, nonce: ++nonce } });

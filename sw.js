@@ -1,6 +1,6 @@
 // Patchpaws service worker. Precaches the whole app so it plays fully offline.
 // Bump VERSION on every release; tools/check-precache.mjs verifies the file list.
-const VERSION = 'v2';
+const VERSION = 'v3';
 const PREFIX = 'patchpaws-';
 const CACHE = PREFIX + VERSION;
 
@@ -46,6 +46,7 @@ const PRECACHE = [
   './js/state/session-store.js',
   './js/state/session.js',
   './js/state/settings.js',
+  './js/state/wake-lock.js',
   './js/state/storage.js',
   './js/state/store.js',
   './js/ui/board/board.js',

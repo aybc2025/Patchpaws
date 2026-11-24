@@ -20,6 +20,7 @@ export function openSettings({ onReset } = {}) {
     toggle('sound', 'Sound'),
     toggle('haptics', 'Vibration', 'Android only'),
     toggle('autoMark', 'Auto ✕', 'Cross out around each cat'),
+    toggle('keepAwake', 'Keep screen on', 'Stops the screen dimming while you play'),
   ];
   let armed = false;
   const reset = h('button', {
